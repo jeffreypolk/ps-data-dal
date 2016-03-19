@@ -65,39 +65,37 @@
                         Execute method
                     </h3>
                     <p>
-                        The Execute method has numerous overloads and returns different types of data based on the output parameter.
+                        The Execute method has numerous overloads and returns different types of data based on 
+                        the passed return parameter.
                     </p>
-                    <script src="https://gist.github.com/jeffreypolk/a62bf1b3b77b042cba4c.js"></script>
+                    <script src="https://gist.github.com/jeffreypolk/fa83100f47fada8b751d.js"></script>
 
                 </div>
 
-                <!-- Output Writer -->
+                <!-- Parameters -->
                 <div>
                     <h3>
-                        <a id="OutputWriter" class="anchor" href="#OutputWriter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
-                        Output Writer
+                        <a id="Parameters" class="anchor" href="#Parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Parameters
                     </h3>
                     <p>
-                        This is a collection of classes to redirect output to a place of your choosing.
-                        This is handy when you have a background worker thread and you want to send output to the UI.
-                        It is a violation to access the UI thread from a background thread.  Therefore, something as simple as
-                        updating a textbox from a background thread requires delegates, etc.  This complexity is abstracted away
-                        through these classes.
+                        Parameters are set using the <span class="code">Parameters.AddWithValue</span> method.
                     </p>
-                    <script src="https://gist.github.com/jeffreypolk/03422f7ec3bf034b031c.js"></script>
+                    <script src="https://gist.github.com/jeffreypolk/4f1287dfd9020abf8f80.js"></script>
                 </div>
 
-                <!-- ProcessRunner -->
+                <!-- Transactions -->
                 <div>
                     <h3>
-                        <a id="ProcessRunner" class="anchor" href="#ProcessRunner" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
-                        ProcessRunner
+                        <a id="Transactions" class="anchor" href="#Transactions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Transaction Handling
                     </h3>
                     <p>
-                        This class makes it easy to initiate external processes.  It wraps the <span class="code">System.Diagnostics.Process</span> class.
-                        The StandardOutput and StandardError streams are redirected to single location for easy access.
-                        It also accepts an <span class="code">Output.IOutputWriter</span> to present the output to the UI thread.
+                        Transactions are handled by calling the <span class="code">BeginTransaction</span>.  All subsequent 
+                        <span class="code">Execute</span> calls are included in that transaction. Calling <span class="code">EndTransaction</span>
+                        will commit/rollback the transaction based on the parameter.
                     </p>
+
                 </div>
 
             </section>
