@@ -210,9 +210,6 @@ Public Class SQL
                     _Connection = Nothing
                 End If
             End If
-
-            ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
-            ' TODO: set large fields to null.
         End If
         disposedValue = True
     End Sub
