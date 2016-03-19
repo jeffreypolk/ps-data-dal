@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports System.Text
 
 Public Class SQL
+    Implements IDisposable
 
 #Region " Parameter Collection "
 
@@ -156,7 +157,7 @@ Public Class SQL
     Private Function BuildCommand(ByVal SQL As String) As SqlCommand
 
         If IsNothing(_Connection) Then
-            If _cnnstr = String.Empty Then
+            If _CnnStr = String.Empty Then
                 Throw New Exception("No connection string defined")
             End If
             _Connection = New SqlConnection(_CnnStr)
@@ -189,18 +190,38 @@ Public Class SQL
         End If
     End Function
 
-    Public Sub Dispose()
-        If _Connection IsNot Nothing Then
-            If _Connection.State <> ConnectionState.Closed Then _Connection.Close()
-            _Connection.Dispose()
-            _Connection = Nothing
-        End If
-    End Sub
-
     Public Sub New()
         _CnnStr = System.Configuration.ConfigurationManager.AppSettings("cnnstr")
     End Sub
     Public Sub New(ByVal ConnectionString As String)
         _CnnStr = ConnectionString
     End Sub
+
+#Region "IDisposable Support"
+    Private disposedValue As Boolean ' To detect redundant calls
+
+    ' IDisposable
+    Protected Overridable Sub Dispose(disposing As Boolean)
+        If Not disposedValue Then
+            If disposing Then
+                If _Connection IsNot Nothing Then
+                    If _Connection.State <> ConnectionState.Closed Then _Connection.Close()
+                    _Connection.Dispose()
+                    _Connection = Nothing
+                End If
+            End If
+
+            ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
+            ' TODO: set large fields to null.
+        End If
+        disposedValue = True
+    End Sub
+
+    ' This code added by Visual Basic to correctly implement the disposable pattern.
+    Public Sub Dispose() Implements IDisposable.Dispose
+        ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
+        Dispose(True)
+    End Sub
+#End Region
+
 End Class
