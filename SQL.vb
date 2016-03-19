@@ -154,6 +154,19 @@ Public Class SQL
         End Try
     End Sub
 
+    Public Sub BeginTransaction()
+        _Transaction = _Connection.BeginTransaction()
+    End Sub
+
+    Private Sub EndTransaction(Optional Rollback As Boolean = False)
+        If Rollback Then
+            _Transaction.Rollback()
+        Else
+            _Transaction.Commit()
+        End If
+        _Transaction = Nothing
+    End Sub
+
     Private Function BuildCommand(ByVal SQL As String) As SqlCommand
 
         If IsNothing(_Connection) Then
