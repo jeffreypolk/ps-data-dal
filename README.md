@@ -1,2 +1,5 @@
 # ps-data-dal
-Helper library for data access
+Library for data access
+
+####Documentation
+http://jeffreypolk.github.io/ps-data-dal
