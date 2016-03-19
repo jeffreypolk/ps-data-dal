@@ -158,12 +158,13 @@ Public Class SQL
         _Transaction = _Connection.BeginTransaction()
     End Sub
 
-    Private Sub EndTransaction(Optional Rollback As Boolean = False)
-        If Rollback Then
-            _Transaction.Rollback()
-        Else
-            _Transaction.Commit()
-        End If
+    Public Sub CommitTransaction()
+        _Transaction.Commit()
+        _Transaction = Nothing
+    End Sub
+
+    Public Sub RollbackTransaction()
+        _Transaction.Rollback()
         _Transaction = Nothing
     End Sub
 
@@ -234,4 +235,27 @@ Public Class SQL
     End Sub
 #End Region
 
+    Private Class test
+        Sub New()
+
+            Using data As New PS.Data.DAL.SQL()
+
+                Try
+                    data.BeginTransaction()
+
+                    data.Execute("uspExecuteProc1")
+                    data.Execute("uspExecuteProc2")
+                    data.Execute("uspExecuteProc3")
+
+                    data.CommitTransaction()
+
+                Catch ex As Exception
+                    data.RollbackTransaction()
+                End Try
+
+            End Using
+
+        End Sub
+
+    End Class
 End Class
