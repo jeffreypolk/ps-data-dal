@@ -235,27 +235,4 @@ Public Class SQL
     End Sub
 #End Region
 
-    Private Class test
-        Sub New()
-
-            Using data As New PS.Data.DAL.SQL()
-
-                Try
-                    data.BeginTransaction()
-
-                    data.Execute("uspExecuteProc1")
-                    data.Execute("uspExecuteProc2")
-                    data.Execute("uspExecuteProc3")
-
-                    data.CommitTransaction()
-
-                Catch ex As Exception
-                    data.RollbackTransaction()
-                End Try
-
-            End Using
-
-        End Sub
-
-    End Class
 End Class
