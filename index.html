@@ -36,10 +36,9 @@
                         Overview
                     </h3>
                     <p>
-                        This project is a library for data access.  It includes a single class to access data from SQL Server.
-                        This could be enhanced overtime to provide access to other data sources - Excel, Oracle, etc.
+                        This library for simple data access.  It includes a single class to access data from SQL Server.
                         It was created as a helper to eliminate all the redundant code required for data access - 
-                        creating connections, building command objects, adding parameters, etc.
+                        creating connections, building command objects, adding parameters, handling transactions etc.
                     </p>
                 </div>
 
@@ -65,7 +64,7 @@
                         Execute method
                     </h3>
                     <p>
-                        The Execute method has numerous overloads and returns different types of data based on 
+                        The <span class="code">Execute</span> method has numerous overloads and returns different types of data based on 
                         the passed return parameter.
                     </p>
                     <script src="https://gist.github.com/jeffreypolk/fa83100f47fada8b751d.js"></script>
@@ -91,11 +90,11 @@
                         Transaction Handling
                     </h3>
                     <p>
-                        Transactions are handled by calling the <span class="code">BeginTransaction</span>.  All subsequent 
-                        <span class="code">Execute</span> calls are included in that transaction. Calling <span class="code">EndTransaction</span>
-                        will commit/rollback the transaction based on the parameter.
+                        A transaction is managed by calling the <span class="code">BeginTransaction</span> method.  All subsequent 
+                        <span class="code">Execute</span> calls are included as part of that transaction. End the transaction
+                        by calling the <span class="code">CommitTransaction</span> method or the <span class="code">RollbackTransaction</span> method.
                     </p>
-
+                    <script src="https://gist.github.com/jeffreypolk/3339f8316ed7393b7bce.js"></script>
                 </div>
 
             </section>
